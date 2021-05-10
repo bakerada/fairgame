@@ -1,0 +1,22 @@
+{
+  "asin_groups": 6,
+  "asin_list_1": ["B08SSSQHHF"],
+  "reserve_min_1": 0,
+  "reserve_max_1": 256,
+  "asin_list_2": ["B084SDYYMP"],
+  "reserve_min_2": 0,
+  "reserve_max_2": 90,
+  "asin_list_3": ["B08G9DHN5B"],
+  "reserve_min_3": 0,
+  "reserve_max_3": 215,
+  "asin_list_4": ["B08G9P71N3"],
+  "reserve_min_4": 0,
+  "reserve_max_4": 26,
+  "asin_list_5": ["B08SSM65L4"],
+  "reserve_min_5": 0,
+  "reserve_max_5": 16,
+  "asin_list_6": ["B08SSM65L4"],
+  "reserve_min_6": 0,
+  "reserve_max_6": 16,
+  "amazon_website": "smile.amazon.com"
+}
