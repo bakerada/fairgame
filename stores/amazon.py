@@ -879,7 +879,7 @@ class Amazon:
         retry = 0
         successful = False
         while not successful:
-            buy_it_now_url = f"https://{self.amazon_website}/checkout/turbo-initiate?ref_=dp_start-bbf_1_glance_buyNow_2-1&pipelineType=turbo&weblab=RCX_CHECKOUT_TURBO_DESKTOP_NONPRIME_87784&temporaryAddToCart=1&offerListing.1={offering_id}&quantity.1=3"
+            buy_it_now_url = f"https://{self.amazon_website}/checkout/turbo-initiate?ref_=dp_start-bbf_1_glance_buyNow_2-1&pipelineType=turbo&weblab=RCX_CHECKOUT_TURBO_DESKTOP_NONPRIME_87784&temporaryAddToCart=1&offerListing.1={offering_id}&quantity.1=5"
             with self.wait_for_page_content_change():
                 self.driver.get(buy_it_now_url)
             timeout = self.get_timeout(5)
@@ -925,7 +925,7 @@ class Amazon:
 
     def attempt_atc(self, offering_id, max_atc_retries=DEFAULT_MAX_ATC_TRIES):
         # Open the add.html URL in Selenium
-        f = f"{AMAZON_URLS['ATC_URL']}?OfferListingId.1={offering_id}&Quantity.1=1"
+        f = f"{AMAZON_URLS['ATC_URL']}?OfferListingId.1={offering_id}&Quantity.1=5"
         atc_attempts = 0
         while atc_attempts < max_atc_retries:
             with self.wait_for_page_content_change(timeout=5):
@@ -1760,6 +1760,7 @@ class Amazon:
                 prefs["profile.managed_default_content_settings.images"] = 0
             options.add_experimental_option("prefs", prefs)
             options.add_argument(f"user-data-dir={path_to_profile}")
+            options.add_argument("--incognito")
             if not self.slow_mode:
                 options.set_capability("pageLoadStrategy", "none")
 
