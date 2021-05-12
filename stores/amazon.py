@@ -49,6 +49,7 @@ from utils import discord_presence as presence
 from utils.debugger import debug
 from utils.logger import log
 from utils.selenium_utils import options, enable_headless
+import sys
 
 # Optional OFFER_URL is:     "OFFER_URL": "https://{domain}/dp/",
 AMAZON_URLS = {
@@ -786,7 +787,7 @@ class Amazon:
                 if offering_id_elements:
                     log.info("Attempting Add To Cart with offer ID...")
                     offering_id = offering_id_elements[0].get_attribute("value")
-                    return_statement = False
+
                     for i in range(5):
                         log.info("Order in stock trying Buy")
                         if not self.alt_checkout:
@@ -799,6 +800,7 @@ class Amazon:
                                     self.take_screenshots,
                                 )
                                 self.save_page_source("failed-atc")
+                                return False
                         else:
                             if self.attempt_atc(offering_id):
                                 pass
@@ -809,6 +811,7 @@ class Amazon:
                                     self.take_screenshots,
                                 )
                                 self.save_page_source("failed-atc")
+                                return False
                 else:
                     log.error(
                         "Unable to find offering ID to add to cart.  Using legacy mode."
@@ -1485,6 +1488,7 @@ class Amazon:
             ):
                 try:
                     log.info("Stuck on a captcha... Lets try to solve it.")
+                    sys.exit()
                     captcha_link = self.driver.page_source.split('<img src="')[1].split(
                         '">'
                     )[
