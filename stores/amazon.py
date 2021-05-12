@@ -786,11 +786,12 @@ class Amazon:
                 if offering_id_elements:
                     log.info("Attempting Add To Cart with offer ID...")
                     offering_id = offering_id_elements[0].get_attribute("value")
+                    return_statement = False
                     for i in range(5):
                         log.info("Order in stock trying Buy")
                         if not self.alt_checkout:
                             if self.buy_it_now(offering_id, max_atc_retries=5):
-                                return True
+                                pass
                             else:
                                 self.send_notification(
                                     "Failed Buy it Now ",
@@ -798,10 +799,9 @@ class Amazon:
                                     self.take_screenshots,
                                 )
                                 self.save_page_source("failed-atc")
-                                return False
                         else:
                             if self.attempt_atc(offering_id):
-                                return True
+                                pass
                             else:
                                 self.send_notification(
                                     "Failed ATC ",
@@ -809,7 +809,6 @@ class Amazon:
                                     self.take_screenshots,
                                 )
                                 self.save_page_source("failed-atc")
-                                return False
                 else:
                     log.error(
                         "Unable to find offering ID to add to cart.  Using legacy mode."
