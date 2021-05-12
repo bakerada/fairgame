@@ -50,6 +50,7 @@ from utils.debugger import debug
 from utils.logger import log
 from utils.selenium_utils import options, enable_headless
 import sys
+import random
 
 # Optional OFFER_URL is:     "OFFER_URL": "https://{domain}/dp/",
 AMAZON_URLS = {
@@ -460,6 +461,7 @@ class Amazon:
                     if self.check_stock(asin, self.reserve_min[i], self.reserve_max[i]):
                         return asin
                     # log.info(f"check time took {time.time()-start_time} seconds")
+                    delay = random.uniform(1., 6.)
                     time.sleep(delay)
 
     @debug
@@ -803,7 +805,9 @@ class Amazon:
                                 return False
                         else:
                             if self.attempt_atc(offering_id):
-                                pass
+                                log.info("Purchased")
+                                return True
+                                
                             else:
                                 self.send_notification(
                                     "Failed ATC ",
