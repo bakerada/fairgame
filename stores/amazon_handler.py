@@ -162,6 +162,7 @@ class AmazonStoreHandler(BaseStoreHandler):
                     merchant_id = json_item["merchant_id"]
                 else:
                     merchant_id = "any"
+                max_purcheses.get("max_purchases",5)
 
                 # Create new instances of an item for each asin specified
                 asins_collection = json_item["asins"]
@@ -182,6 +183,7 @@ class AmazonStoreHandler(BaseStoreHandler):
                             merchant_id=merchant_id,
                             furl=furl(
                                 url=f"https://smile.amazon.com/gp/aod/ajax?asin={asin}"
+                            max_purchases=max_purchases
                             ),
                         )
                     )

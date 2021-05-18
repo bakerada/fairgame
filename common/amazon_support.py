@@ -128,6 +128,8 @@ class FGItem:
     condition: AmazonItemCondition = AmazonItemCondition.New
     status_code: int = 200
     merchant_id: str = "any"
+    max_purchases: int = 5
+    offer_count: int = 0
 
 
 def get_merchant_names(tree):

@@ -275,9 +275,12 @@ class AmazonMonitor(aiohttp.ClientSession):
                         if time.time() > self.block_purchase_until:
                             await queue.put(qualified_seller)
                             log.debug("Offer placed in queue")
-                            log.debug("Quitting monitoring task")
-                            future.set_result(None)
-                            return None
+                            item.offer_count +=1
+                            log.info(f"Offer placed in queue, {item.offer_count} total offers")
+                            if item.offer_count > item.max_purchases:
+                                log.debug("Quitting monitoring task")
+                                future.set_result(None)
+                                return None
                         else:
                             log.debug(
                                 f"Purchasing is blocked until {self.block_purchase_until}. It is now {time.time()}."
